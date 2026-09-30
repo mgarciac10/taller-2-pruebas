@@ -4,8 +4,8 @@ from models import Order
 
 class StubUserRepository:
     def get_user_email(self, user_id):
-        # TODO: retornar siempre el mismo email ficticio
-        return "_____________________"
+        # retornar siempre el mismo email ficticio
+        return "stub@test.local"
 
 class DummyLogger:
     def log(self, msg):
@@ -18,9 +18,9 @@ class NullNotifier:
 def test_create_order_with_stub():
     db = SessionLocal()
     order = create_order(10, 200, NullNotifier(), DummyLogger(), db, StubUserRepository())
-    # TODO: Comparar con las respuestas esperadas
-    assert order.status == '______'
-    assert order.user_email == "_____________________"
+    # comparar con las respuestas esperadas
+    assert order.status == 'CREATED'
+    assert order.user_email == "stub@test.local"
     
     db.query(Order).delete()
     db.commit()
